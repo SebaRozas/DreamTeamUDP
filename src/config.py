@@ -41,10 +41,8 @@ SERIES_BCCH = [
     # (codigo, nombre, frecuencia, unidad, id_tema)
     ("F022.TPM.TIN.D001.NO.Z.D", "Tasa de Política Monetaria (TPM)", "D", "% anual", 4),
     ("F074.IPC.VAR.Z.Z.C.M", "IPC, variación mensual (calcular interanual con LAG 12 en SQL)", "M", "var. % mensual", 2),
-    ("F089.EDEP.POR.91EI24.M","Expectativas de inflación a 2 años (EEE)","M","% anual", 2),
+    ("F089.EDEP.POR.91EI24.M", "Expectativas de inflación a 2 años (EEE)", "M", "% anual", 2),
     ("F032.IMC.IND.Z.Z.EP18.Z.Z.0.M", "Imacec (índice)", "M", "índice 2018=100", 1),
-    # Brecha de actividad: NO es una serie propia, se calcula en Python/SQL
-    # como Imacec vs. su tendencia (HP filter o similar) a partir de la fila anterior.
     ("F049.DES.TAS.INE9.10.M", "Tasa de desempleo nacional", "M", "%", 1),
     ("F073.TCO.PRE.Z.D", "Tipo de cambio nominal observado (CLP/USD)", "D", "CLP/USD", 5),
     ("F019.PPB.PRE.40.M", "Precio del cobre refinado BML", "M", "US$/libra", 5),
@@ -56,7 +54,10 @@ SERIES_FRED = [
     # (codigo, nombre, frecuencia, unidad, id_tema)
     ("FEDFUNDS", "Fed Funds Rate (tasa de política EE.UU.)", "M", "% anual", 6),
     ("DGS10", "Bono del Tesoro EE.UU. a 10 años", "D", "% anual", 6),
+    ("DCOILWTICO", "Petróleo WTI", "D", "USD/barril", 6),
+    ("CPIAUCSL", "IPC Estados Unidos (US CPI)", "M", "índice", 6),
 ]
+
 
 
 
