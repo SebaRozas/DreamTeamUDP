@@ -35,7 +35,6 @@ SELECT s.nombre,
        COUNT(*)                     AS n_observaciones
 FROM observaciones o
 JOIN series s ON s.id_serie = o.id_serie
-WHERE s.frecuencia = 'M'
 GROUP BY s.nombre, anio
 ORDER BY s.nombre, anio;
 
@@ -66,3 +65,7 @@ SELECT id_serie,
              ROWS BETWEEN 2 PRECEDING AND CURRENT ROW), 2) AS promedio_movil_3m
 FROM observaciones
 ORDER BY id_serie, fecha;
+
+
+
+
