@@ -2,7 +2,7 @@
 Carga de las series extraídas a la base de datos relacional (SQLite).
 
 Flujo:
-  1. Crea el esquema ejecutando sql/01_esquema.sql (si no existe).
+  1. Crea el esquema ejecutando sql/Esquema.sql (si no existe).
   2. Registra el catálogo de series (tabla `series`).
   3. Inserta/actualiza las observaciones (tabla `observaciones`).
 
@@ -33,7 +33,7 @@ def obtener_engine():
 
 def crear_esquema(engine) -> None:
     """Ejecuta el script DDL del esquema (idempotente)."""
-    script = (config.RUTA_SQL / "01_esquema.sql").read_text(encoding="utf-8")
+    script = (config.RUTA_SQL / "Esquema.sql").read_text(encoding="utf-8")
     with engine.begin() as conn:
         for sentencia in script.split(";"):
             if sentencia.strip():
