@@ -1,8 +1,13 @@
 -- ============================================================
--- Consultas SQL de ejemplo
--- Cada consulta ilustra una técnica exigida en el trabajo:
--- JOIN, GROUP BY y funciones de ventana.
--- Adapten estas consultas a sus propias series.
+-- Consultas SQL -- Monitor de Coyuntura y Proyeccion de la TPM
+-- Equipo DreamTeam (Sebastian Rozas, Sofia Vergara, Natalia Luco)
+-- Pregunta de investigacion (Hito 1): cual es la trayectoria
+-- proyectada para la TPM a 24 meses mediante una Regla de Taylor
+-- adaptada a economia abierta, y como la condicionan la Fed y
+-- la persistencia inflacionaria.
+-- Validadas contra data/coyuntura.db con el catalogo de 12 series
+-- BCCh/FRED definido en el Hito 1.
+-- Tecnicas: JOIN, GROUP BY y funciones de ventana (LAG, AVG OVER).
 -- ============================================================
 
 -- ------------------------------------------------------------
