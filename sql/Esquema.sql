@@ -1,9 +1,10 @@
 -- ============================================================
--- Esquema de la base de datos del proyecto
--- Monitor de Coyuntura y Proyección Macroeconómica
--- Ciencia de Datos para Economía (ICO09425)
---
--- Motor: SQLite (compatible con PostgreSQL con cambios menores)
+-- Esquema de la base de datos -- Monitor de Coyuntura y
+-- Proyeccion de la TPM (Hito 2)
+-- Equipo DreamTeam (Sebastian Rozas, Sofia Vergara, Natalia Luco)
+-- 3 tablas relacionadas: temas (1) -> series (muchas) -> 
+-- observaciones (muchas por serie). Diseñado para evitar
+-- duplicar el nombre del tema en cada fila de datos.
 -- ============================================================
 
 -- Tabla 1: Catálogo de series
