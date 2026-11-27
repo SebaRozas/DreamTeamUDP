@@ -20,9 +20,9 @@ DreamTeamUDP/
 │   ├── config.py             # Catálogo de series y rutas
 │   ├── extraccion.py         # Descarga desde APIs BCCh y FRED
 │   ├── carga_db.py           # Crea el esquema y carga la base
-│   └── exportar_powerbi.py   # Crea la vista para el monitor Power BI
+│   └── exportar_powerbi.py   # Crea la vista vista_monitor (variaciones calculadas en SQL)
 ├── sql/
-│   ├── 01_esquema.sql        # 3 tablas: temas, series, observaciones
+│   ├── Esquema.sql        # 3 tablas: temas, series, observaciones
 │   └── Consultas.sql         # JOIN, GROUP BY y funciones de ventana
 ├── .env.example        # Plantilla de credenciales
 ├── requirements.txt
@@ -61,7 +61,7 @@ La extracción usa una fecha de corte fija para que todos obtengan exactamente l
 ```bash
 python src/carga_db.py --hasta 2026-08-31
 ```
-Esto descarga las series desde las APIs, crea `data/coyuntura.db` con el esquema de `sql/01_esquema.sql` y carga las observaciones. Revisar en la salida que todas las series aparezcan con `[OK]`.
+Esto descarga las series desde las APIs, crea `data/coyuntura.db` con el esquema de `sql/Esquema.sql` y carga las observaciones. Revisar en la salida que todas las series aparezcan con `[OK]`.
 
 Fecha de corte del Hito 2 es 2026-08-31. Si se omite `--hasta`, se usa la fecha de hoy y la base cambia cada día.
 
@@ -77,11 +77,11 @@ No debe aparecer ningún `Error`.
 
 Abrir `notebooks/01_analisis_coyuntura.ipynb` y ejecutar todas las celdas. El notebook lee los datos desde `data/coyuntura.db`.
 
-6. (Opcional) Preparar la vista para Power BI
+6. (Opcional) Crear la vista de resumen en la base
 ```bash
 python src/exportar_powerbi.py
 ```
-Crea la vista `vista_monitor` en la base; Power BI se conecta a `data/coyuntura.db`.
+Crea la vista `vista_monitor` en `data/coyuntura.db`, con variaciones interanuales y promedios móviles calculados en SQL.
 
 ### Probar sin credenciales
 Para verificar que el pipeline funciona antes de tener las claves de las APIs:
