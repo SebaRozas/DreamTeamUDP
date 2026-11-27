@@ -49,7 +49,9 @@ SELECT id_serie,
        LAG(valor, 12) OVER (PARTITION BY id_serie ORDER BY fecha)  AS valor_12m_atras,
        ROUND( 100.0 * (valor / LAG(valor, 12) OVER (PARTITION BY id_serie ORDER BY fecha) - 1), 2) AS var_interanual_pct
 FROM observaciones
-WHERE id_serie IN (SELECT id_serie FROM series WHERE frecuencia = 'M')
+-- Solo índices y precios (IPC empalmado, Imacec, cobre, IPC EE.UU.):
+-- en las tasas la variación en % no tiene sentido, ver Consulta 3b.
+WHERE id_serie IN ('F074.IPC.IND.Z.EP23.C.M', 'F032.IMC.IND.Z.Z.EP18.Z.Z.0.M', 'F019.PPB.PRE.40.M', 'CPIAUCSL')
 ORDER BY id_serie, fecha;
 
 -- ------------------------------------------------------------
@@ -66,6 +68,36 @@ SELECT id_serie,
 FROM observaciones
 ORDER BY id_serie, fecha;
 
+-- ------------------------------------------------------------
+-- Consulta 3b (función de ventana): cambio en 12 meses de las
+-- tasas e índices de difusión, en puntos porcentuales.
+-- En tasas se reporta la diferencia (ej: desempleo pasa de 8%
+-- a 9% = +1 pp), no la variación porcentual.
+-- ------------------------------------------------------------
+SELECT id_serie,
+       fecha,
+       valor,
+       ROUND(valor - LAG(valor, 12) OVER (PARTITION BY id_serie ORDER BY fecha), 2) AS dif_12m_pp
+FROM observaciones
+WHERE id_serie IN ('F089.EDEP.POR.91EI24.M', 'F049.DES.TAS.INE9.10.M', 'FEDFUNDS', 'G089.IME.IND.A3.M')
+ORDER BY id_serie, fecha;
 
+-- ------------------------------------------------------------
+-- Consulta 5 (JOIN + GROUP BY): control de calidad de la base.
+-- Cobertura y rango de cada serie, para verificar que se
+-- cargaron datos reales (no del modo demo) y sin huecos.
+-- ------------------------------------------------------------
+SELECT s.id_serie,
+       s.nombre,
+       s.frecuencia,
+       COUNT(*)               AS n_obs,
+       MIN(o.fecha)           AS desde,
+       MAX(o.fecha)           AS hasta,
+       ROUND(MIN(o.valor), 2) AS minimo,
+       ROUND(MAX(o.valor), 2) AS maximo
+FROM observaciones o
+JOIN series s ON s.id_serie = o.id_serie
+GROUP BY s.id_serie, s.nombre, s.frecuencia
+ORDER BY s.frecuencia, s.nombre;
 
 
