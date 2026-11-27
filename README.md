@@ -3,7 +3,7 @@
 ## Descripción del Proyecto
 Este proyecto analiza la trayectoria de la Tasa de Política Monetaria (TPM) del Banco Central de Chile mediante una Regla de Taylor adaptada a una economía abierta. El sistema integra la ingesta automatizada de series macroeconómicas desde las APIs oficiales del Banco Central de Chile (BCCh) y la Reserva Federal de St. Louis (FRED), almacenándolas en una base de datos relacional SQLite para su posterior análisis y modelación.
 
-Pregunta de investigación: ¿cuál es la trayectoria proyectada para la TPM a 24 meses mediante una Regla de Taylor adaptada a economía abierta, y cómo la condicionan la Fed y la persistencia inflacionaria?
+Pregunta de investigación: "¿Cuál es la trayectoria proyectada para la TPM a un horizonte de 24 meses estimada mediante indicadores macroeconómicos que permitan explicar el movimiento de la variable?”
 
 ## Integrantes
 * Sebastián Rozas 
