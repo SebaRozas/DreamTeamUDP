@@ -49,9 +49,9 @@ SELECT id_serie,
        LAG(valor, 12) OVER (PARTITION BY id_serie ORDER BY fecha)  AS valor_12m_atras,
        ROUND( 100.0 * (valor / LAG(valor, 12) OVER (PARTITION BY id_serie ORDER BY fecha) - 1), 2) AS var_interanual_pct
 FROM observaciones
--- Solo índices y precios (IPC empalmado, Imacec, cobre, IPC EE.UU.):
+-- Solo índices y precios (IPC empalmado, IPC sin volátiles, Imacec, Imacec no minero, cobre, IPC EE.UU.):
 -- en las tasas la variación en % no tiene sentido, ver Consulta 3b.
-WHERE id_serie IN ('F074.IPC.IND.Z.EP23.C.M', 'F032.IMC.IND.Z.Z.EP18.Z.Z.0.M', 'F019.PPB.PRE.40.M', 'CPIAUCSL')
+WHERE id_serie IN ('F074.IPC.IND.Z.EP23.C.M', 'G073.IPCSV.IND.2023.M', 'F032.IMC.IND.Z.Z.EP18.Z.Z.0.M', 'F032.IMC.IND.Z.Z.EP18.N03.Z.0.M', 'F019.PPB.PRE.40.M', 'CPIAUCSL')
 ORDER BY id_serie, fecha;
 
 -- ------------------------------------------------------------
@@ -79,7 +79,7 @@ SELECT id_serie,
        valor,
        ROUND(valor - LAG(valor, 12) OVER (PARTITION BY id_serie ORDER BY fecha), 2) AS dif_12m_pp
 FROM observaciones
-WHERE id_serie IN ('F089.EDEP.POR.91EI24.M', 'F049.DES.TAS.INE9.10.M', 'FEDFUNDS', 'G089.IME.IND.A3.M')
+WHERE id_serie IN ('F089.IPC.V12.15.M', 'F049.DES.TAS.INE9.10.M', 'FEDFUNDS')
 ORDER BY id_serie, fecha;
 
 -- ------------------------------------------------------------
