@@ -22,7 +22,7 @@ DreamTeamUDP/
 │   ├── carga_db.py           # Crea el esquema y carga la base
 │   └── exportar_powerbi.py   # Crea la vista para el monitor Power BI
 ├── sql/
-│   ├── 01_esquema.sql        # 3 tablas: temas, series, observaciones
+│   ├── Esquema.sql        # 3 tablas: temas, series, observaciones
 │   └── Consultas.sql         # JOIN, GROUP BY y funciones de ventana
 ├── .env.example        # Plantilla de credenciales
 ├── requirements.txt
@@ -61,7 +61,7 @@ La extracción usa una fecha de corte fija para que todos obtengan exactamente l
 ```bash
 python src/carga_db.py --hasta 2026-08-31
 ```
-Esto descarga las series desde las APIs, crea `data/coyuntura.db` con el esquema de `sql/01_esquema.sql` y carga las observaciones. Revisar en la salida que todas las series aparezcan con `[OK]`.
+Esto descarga las series desde las APIs, crea `data/coyuntura.db` con el esquema de `sql/Esquema.sql` y carga las observaciones. Revisar en la salida que todas las series aparezcan con `[OK]`.
 
 Fecha de corte del Hito 2 es 2026-08-31. Si se omite `--hasta`, se usa la fecha de hoy y la base cambia cada día.
 
