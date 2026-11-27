@@ -20,7 +20,7 @@ DreamTeamUDP/
 │   ├── config.py             # Catálogo de series y rutas
 │   ├── extraccion.py         # Descarga desde APIs BCCh y FRED
 │   ├── carga_db.py           # Crea el esquema y carga la base
-│   └── exportar_powerbi.py   # Crea la vista para el monitor Power BI
+│   └── exportar_powerbi.py   # Crea la vista vista_monitor (variaciones calculadas en SQL)
 ├── sql/
 │   ├── Esquema.sql        # 3 tablas: temas, series, observaciones
 │   └── Consultas.sql         # JOIN, GROUP BY y funciones de ventana
@@ -77,11 +77,11 @@ No debe aparecer ningún `Error`.
 
 Abrir `notebooks/01_analisis_coyuntura.ipynb` y ejecutar todas las celdas. El notebook lee los datos desde `data/coyuntura.db`.
 
-6. (Opcional) Preparar la vista para Power BI
+6. (Opcional) Crear la vista de resumen en la base
 ```bash
 python src/exportar_powerbi.py
 ```
-Crea la vista `vista_monitor` en la base; Power BI se conecta a `data/coyuntura.db`.
+Crea la vista `vista_monitor` en `data/coyuntura.db`, con variaciones interanuales y promedios móviles calculados en SQL.
 
 ### Probar sin credenciales
 Para verificar que el pipeline funciona antes de tener las claves de las APIs:
